@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SuitmediaPalindrome</string>
+    <string name="content_desc_swipe_to_refresh_users">Swipe down to refresh users list</string>
+</resources>
