@@ -1,4 +1,4 @@
-package com.aantrvnnta.suitmediapalindrome
+package com.aantrvnnta.suitmediapalindrome.model
 
 data class User(
     val id: Int,

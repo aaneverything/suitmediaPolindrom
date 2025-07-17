@@ -1,4 +1,4 @@
-package com.aantrvnnta.suitmediapalindrome
+package com.aantrvnnta.suitmediapalindrome.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,12 +8,16 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.aantrvnnta.suitmediapalindrome.R
+import com.aantrvnnta.suitmediapalindrome.viewmodel.SecondViewModel
 
 class SecondFragment : Fragment() {
     private val args: SecondFragmentArgs by navArgs()
-    private var selectedUserName: String? = null
+    private val viewModel: SecondViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +33,10 @@ class SecondFragment : Fragment() {
         val btnChooseUser = view.findViewById<Button>(R.id.btnChooseUser)
 
         tvName.text = args.name
-        tvSelectedUser.text = selectedUserName ?: "Selected User Name"
+
+        viewModel.selectedUserName.observe(viewLifecycleOwner, Observer { userName ->
+            tvSelectedUser.text = userName ?: "Selected User Name"
+        })
 
         btnChooseUser.setOnClickListener {
             findNavController().navigate(SecondFragmentDirections.actionSecondFragmentToThirdFragment())
@@ -37,9 +44,7 @@ class SecondFragment : Fragment() {
 
         setFragmentResultListener("selectedUser") { _, bundle ->
             val userName = bundle.getString("userName")
-            selectedUserName = userName
-            tvSelectedUser.text = userName ?: "Selected User Name"
+            viewModel.setSelectedUserName(userName ?: "Selected User Name")
         }
     }
 }
-

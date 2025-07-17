@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.aantrvnnta.suitmediapalindrome.FirstFragment"
+        android:name="com.aantrvnnta.suitmediapalindrome.view.FirstFragment"
         android:label="First Screen"
         tools:layout="@layout/fragment_first">
         <action
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.aantrvnnta.suitmediapalindrome.SecondFragment"
+        android:name="com.aantrvnnta.suitmediapalindrome.view.SecondFragment"
         android:label="Second Screen"
         tools:layout="@layout/fragment_second">
         <argument
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/ThirdFragment"
-        android:name="com.aantrvnnta.suitmediapalindrome.ThirdFragment"
+        android:name="com.aantrvnnta.suitmediapalindrome.view.ThirdFragment"
         android:label="Third Screen"
         tools:layout="@layout/fragment_third" />
 

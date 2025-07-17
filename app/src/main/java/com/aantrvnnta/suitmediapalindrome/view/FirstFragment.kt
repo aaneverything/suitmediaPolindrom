@@ -1,4 +1,4 @@
-package com.aantrvnnta.suitmediapalindrome
+package com.aantrvnnta.suitmediapalindrome.view
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -8,10 +8,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
+import com.aantrvnnta.suitmediapalindrome.R
+import com.aantrvnnta.suitmediapalindrome.viewmodel.FirstViewModel
 
 class FirstFragment : Fragment() {
+    private val viewModel: FirstViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,23 +33,18 @@ class FirstFragment : Fragment() {
 
         btnCheck.setOnClickListener {
             val sentence = etSentence.text.toString()
-            if (isPalindrome(sentence)) {
-                showDialog("isPalindrome")
-            } else {
-                showDialog("not palindrome")
-            }
+            viewModel.checkPalindrome(sentence)
         }
+
+        viewModel.palindromeResult.observe(viewLifecycleOwner, Observer { message ->
+            showDialog(message)
+        })
 
         btnNext.setOnClickListener {
             val name = etName.text.toString()
             val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment(name)
             findNavController().navigate(action)
         }
-    }
-
-    private fun isPalindrome(input: String): Boolean {
-        val clean = input.replace(" ", "").lowercase()
-        return clean == clean.reversed()
     }
 
     private fun showDialog(message: String) {
@@ -54,4 +54,3 @@ class FirstFragment : Fragment() {
             .show()
     }
 }
-
